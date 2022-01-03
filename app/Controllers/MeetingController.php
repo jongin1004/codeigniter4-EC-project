@@ -82,4 +82,35 @@ class MeetingController extends BaseController
             'categories' => $categories,
         ]);
     }
+
+    public function modify($id)
+    {
+        helper('form');
+        $validation = service('validation');
+        $getPost = $this->request->getPost();
+        $getPost['user_id'] = 1;
+
+        if (!$validation->run($getPost, 'meeting_create')) {
+            $meeting_post = $this->meetingModel->find($id);
+            $categories = $this->categoryModel->findAll();
+            $errors = $validation->getErrors();
+            echo view('meeting/modifyForm', [
+                'categories' => $categories,
+                'errors' => $errors,
+                'meeting_post' => $meeting_post
+            ]);
+        } 
+
+        $data = [
+            'user_id' => $getPost['user_id'],
+            'category_id' => $getPost['category_id'],
+            'meeting_title' => $getPost['meeting_title'],
+            'meeting_description' => $getPost['meeting_description'],
+        ];
+
+        $updateResult = $this->meetingModel->update($id, $data);
+        if ( $updateResult ) {
+            return redirect()->to(base_url('meeting/'.$id));
+        }        
+    }
 }
