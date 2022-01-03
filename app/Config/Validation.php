@@ -40,4 +40,20 @@ class Validation
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+
+    public $meeting_create = [
+        'user_id'              => 'required',
+        'category_id'          => 'required|is_not_unique[categories.category_id]',
+        'meeting_title'       => 'required',
+        'meeting_description' => 'required'
+    ];
+
+    public $meeting_create_errors = [
+        'username' => [
+            'required'    => 'You must choose a username.',
+        ],
+        'email'    => [
+            'valid_email' => 'Please check the Email field. It does not appear to be valid.',
+        ]
+    ];
 }

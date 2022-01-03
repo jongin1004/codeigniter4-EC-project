@@ -17,20 +17,30 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!-- 구글 일본어 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
     <title>EC-site</title>
 </head>
-<body>
+<body>    
     <div class="header">
         <?= $this->include('layout/header') ?>
     </div>
 
     <div class="result">
-        <?= $this->renderSection('content') ?>        
+        <div class="content">
+            <?= $this->renderSection('content') ?>        
+        </div> 
     </div>
     
     <div class="footer">
         <?= $this->include('layout/footer') ?>
     </div>
+
+    <script>
+      $('#summernote').summernote({
+        placeholder: '内容を入力してください。',
+        tabsize: 5,
+        height: 250
+      });
+    </script>
 </body>
 </html>
