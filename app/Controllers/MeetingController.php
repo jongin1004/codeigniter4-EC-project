@@ -2,18 +2,19 @@
 
 namespace App\Controllers;
 
-use App\Models\CategoryModel;
 use App\Controllers\BaseController;
 
 class MeetingController extends BaseController
 {
     protected $categoryModel;
+    protected $meetingModel;
     protected $db;
 
     function __construct()
     {
         $this->db = db_connect();
         $this->categoryModel = model('CategoryModel');
+        $this->meetingModel = model('MeetingModel');
     }
 
     public function index()
@@ -32,19 +33,40 @@ class MeetingController extends BaseController
 
     public function create()
     {
+        helper('form');
         $validation = service('validation');
         $getPost = $this->request->getPost();
-        $getPost['user_id'] = 1;
-        var_dump($getPost);
+        $getPost['user_id'] = 1;        
+
 
         if (! $validation->run($getPost, 'meeting_create')) {
-            echo "실패";
-            exit;
+            $categories = $this->categoryModel->findAll();
+            $errors = $validation->getErrors();
+            echo view('meeting/createForm', [
+                'errors' => $errors,
+                'categories' => $categories,
+            ]);
         }
 
-        echo "성공";
-        exit;
+        $data = [
+            'user_id' => 1,
+            'category_id' => $getPost['category_id'],
+            'meeting_title' => $getPost['meeting_title'],
+            'meeting_description' => $getPost['meeting_description'],
+        ];
+
+        if ($this->meetingModel->insert($data)) {
+            echo "성공";
+        } else {
+            echo "실패";
+        }
         
-        var_dump($getPost);
+        // var_dump($getPost);
     }
+
+    // public function getList()
+    // {   
+    //     $meeting_posts = $this->meetingModel->findAll();
+    //     var_dump($meeting_posts);
+    // }
 }

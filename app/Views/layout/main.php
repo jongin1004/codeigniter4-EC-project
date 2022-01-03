@@ -37,8 +37,7 @@
 
     <script>
       $('#summernote').summernote({
-        placeholder: '内容を入力してください。',
-        tabsize: 5,
+        placeholder: '内容を入力してください。',        
         height: 250
       });
     </script>
