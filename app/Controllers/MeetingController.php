@@ -55,16 +55,17 @@ class MeetingController extends BaseController
             'meeting_description' => $getPost['meeting_description'],
         ];
 
-        if ($this->meetingModel->insert($data)) {
+        $insertResult = $this->meetingModel->insert($data);
+        $meeting_id = $this->meetingModel->getInsertID();
+
+        if (! $insertResult ) {
             echo "성공";
-        } else {
-            echo "실패";
         }
-        
-        // var_dump($getPost);
+
+        return redirect()->to(base_url('/meeting/'.$meeting_id));        
     }
 
-    public function showDetail($id)
+    public function showDetail($id = null)
     {   
         $meeting_post = $this->meetingModel->find($id);
 
@@ -73,7 +74,7 @@ class MeetingController extends BaseController
         ]);
     }
 
-    public function modifyForm($id)
+    public function modifyForm($id = null)
     {
         $categories = $this->categoryModel->findAll();
         $meeting_post = $this->meetingModel->find($id);
@@ -83,7 +84,7 @@ class MeetingController extends BaseController
         ]);
     }
 
-    public function modify($id)
+    public function modify($id = null)
     {
         helper('form');
         $validation = service('validation');
@@ -112,5 +113,20 @@ class MeetingController extends BaseController
         if ( $updateResult ) {
             return redirect()->to(base_url('meeting/'.$id));
         }        
+    }
+
+    public function delete($id = null)
+    {   
+        $data = [
+            'is_delete' => 'y',
+        ];
+        $deleteResult = $this->meetingModel->update($id, $data);
+
+        if (! $deleteResult ) {
+            echo "삭제실패";
+            exit;
+        }
+
+        return redirect()->to(base_url('/'));
     }
 }

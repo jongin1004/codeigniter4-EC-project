@@ -37,6 +37,7 @@ $routes->post('/meeting/new', 'MeetingController::create');
 $routes->get('/meeting/(:num)', 'MeetingController::showDetail/$1');
 $routes->get('/meeting/(:num)/modify', 'MeetingController::modifyForm/$1');
 $routes->post('/meeting/(:num)/modify', 'MeetingController::modify/$1');
+$routes->get('/meeting/(:num)/delete', 'MeetingController::delete/$1');
 
 /*
  * --------------------------------------------------------------------

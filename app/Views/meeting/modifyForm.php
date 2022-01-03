@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
     <h3>集まりページ</h3>
     
-    <form action="<?= base_url('/meeting/'.$meeting_post['meeting_id'].'/modify') ?>" method="post">
+    <form action="<?= base_url('/meeting/'.esc($meeting_post['meeting_id']).'/modify') ?>" method="post">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <select class="custom-select" name="category_id">                    

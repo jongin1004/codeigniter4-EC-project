@@ -16,8 +16,8 @@
             <?= $meeting_post['meeting_description'] ?>
         </div>
         <div>
-            <a href="<?= base_url('/meeting/'.$meeting_post['meeting_id'].'/modify') ?>" class="btn btn-primary">修正</a>
-            <a href="<?= base_url() ?>" class="btn btn-danger">削除</a>
+            <a href="<?= base_url('/meeting/'.esc($meeting_post['meeting_id']).'/modify') ?>" class="btn btn-primary">修正</a>
+            <a href="<?= base_url('/meeting/'.esc($meeting_post['meeting_id']).'/delete') ?>" class="btn btn-danger">削除</a>
         </div>        
     </div>
 

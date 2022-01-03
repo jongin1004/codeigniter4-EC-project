@@ -13,6 +13,7 @@ class MeetingModel extends Model
         'category_id',
         'meeting_title',
         'meeting_description',
+        'is_delete',
     ];
 
     // Dates
