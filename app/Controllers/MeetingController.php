@@ -64,9 +64,22 @@ class MeetingController extends BaseController
         // var_dump($getPost);
     }
 
-    // public function getList()
-    // {   
-    //     $meeting_posts = $this->meetingModel->findAll();
-    //     var_dump($meeting_posts);
-    // }
+    public function showDetail($id)
+    {   
+        $meeting_post = $this->meetingModel->find($id);
+
+        echo view('meeting/showDetail', [
+            'meeting_post' => $meeting_post
+        ]);
+    }
+
+    public function modifyForm($id)
+    {
+        $categories = $this->categoryModel->findAll();
+        $meeting_post = $this->meetingModel->find($id);
+        echo view('meeting/modifyForm', [
+            'meeting_post' => $meeting_post,
+            'categories' => $categories,
+        ]);
+    }
 }

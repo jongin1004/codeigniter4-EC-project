@@ -34,6 +34,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'MainPageController::index');
 $routes->get('/meeting/new', 'MeetingController::createForm');
 $routes->post('/meeting/new', 'MeetingController::create');
+$routes->get('/meeting/(:num)', 'MeetingController::showDetail/$1');
+$routes->get('/meeting/(:num)/modify', 'MeetingController::modifyForm/$1');
 
 /*
  * --------------------------------------------------------------------

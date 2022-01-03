@@ -6,7 +6,8 @@ use CodeIgniter\Model;
 
 class MeetingModel extends Model
 {
-    protected $table            = 'meeting_post';
+    protected $table      = 'meeting_post';
+    protected $primaryKey = 'meeting_id';
     protected $allowedFields    = [
         'user_id',
         'category_id',
