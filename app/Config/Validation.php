@@ -42,8 +42,8 @@ class Validation
     //--------------------------------------------------------------------
 
     public $meeting_create = [
-        'user_id'              => 'required',
-        'category_id'          => 'required|is_not_unique[categories.category_id]',
+        'user_id'             => 'required',
+        'category_id'         => 'required|is_not_unique[categories.category_id]',
         'meeting_title'       => 'required',
         'meeting_description' => 'required'
     ];
@@ -55,5 +55,12 @@ class Validation
         'email'    => [
             'valid_email' => 'Please check the Email field. It does not appear to be valid.',
         ]
+    ];
+
+    public $register = [
+        'user_name'        => 'required|alpha_numeric',
+        'user_email'       => 'required|is_unique[users.user_email]',
+        'user_password'    => 'required|min_length[4]|max_length[12]|matches[password_confirm]',
+        'password_confirm' => 'required'
     ];
 }
