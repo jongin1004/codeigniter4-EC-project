@@ -25,7 +25,7 @@
         <?= $this->include('layout/header') ?>
     </div>
 
-    <div class="result py-7">
+    <div class="result">
         <div class="content">
             <?= $this->renderSection('content') ?>        
         </div> 
