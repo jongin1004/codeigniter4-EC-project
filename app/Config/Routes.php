@@ -36,18 +36,20 @@ $routes->get('/', 'MainPageController::index');
 
 $routes->group('meeting', function ($routes)
 {
-    $routes->get('new', 'MeetingController::createForm');
-    $routes->post('new', 'MeetingController::create');
+    $routes->get('new', 'MeetingController::createForm', ['filter' => 'auth']);
+    $routes->post('new', 'MeetingController::create', ['filter' => 'auth']);
     $routes->get('(:num)', 'MeetingController::showDetail/$1');
     $routes->get('(:num)/modify', 'MeetingController::modifyForm/$1');
     $routes->post('(:num)/modify', 'MeetingController::modify/$1');
     $routes->get('(:num)/delete', 'MeetingController::delete/$1');
 });
 
+// login/register 관련 
 $routes->get('login', 'AuthController::index');
 $routes->post('login', 'AuthController::authentication');
 $routes->get('register', 'RegisterController::index');
 $routes->post('register', 'RegisterController::register');
+$routes->get('logout', 'AuthController::logout');
 
 /*
  * --------------------------------------------------------------------

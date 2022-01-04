@@ -42,4 +42,11 @@ class AuthController extends BaseController
             return redirect()->to(base_url('login?URL='.$url));
         }
     }
+
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->back();
+    }
 }

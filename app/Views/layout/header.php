@@ -1,3 +1,4 @@
+<?php $session = session(); ?>
 <nav class="navbar navbar-expand-lg navbar-light position-fixed bg-white" style="width: 100%;">
     <a class="navbar-brand" href="/"><i class="fas fa-shopping-bag"></i>フリマサイト</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,12 +13,21 @@
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url() ?>">Link</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('login?URL='.current_urL()) ?>">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('register') ?>">Register</a>
-        </li>
+        <?php if($session->get('is_login') !== true): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('login?URL='.current_urL()) ?>">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('register') ?>">Register</a>
+            </li>
+        <?php endif; ?>
+
+        <?php if($session->get('is_login') === true): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
+            </li>
+        <?php endif; ?>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
