@@ -5,12 +5,12 @@
 
 a {
     text-decoration: none !important; /* 링크의 밑줄 제거 */
-    color: inherit; /*
+    color: inherit; 
 }
 
 body {
     font-family: 'Kiwi Maru', serif;    
-    /* height: 100vh;     */
+    /* height: 100vh; */
 }
 
 .header {
@@ -27,15 +27,16 @@ body {
 .content {
     width: 800px;
     margin: 0 auto;
-    padding-bottom: 30px;
+    /* padding-top: 60px;
+    padding-bottom: 30px; */
 }
 
 .footer {
     background-color:#495057;
     max-width: 100%;
 }
-/* 
-.px-10 {
-    padding-left: 30vw !important;
-    padding-right: 30vw !important;
-} */
+
+.py-7 {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}

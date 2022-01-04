@@ -10,7 +10,7 @@
     </div>
 
     <!-- 본문 -->
-    <div class="d-flex flex-column my-3 p-3 bg-white rounded shadow-sm" style="min-height: 300px;">
+    <div class="d-flex flex-column my-3 p-3 bg-white rounded shadow-sm" style="min-height: 600px;">
         <h5 class="border-bottom border-gray pb-2 mb-0"><?= esc($meeting_post['meeting_title']) ?></h5>
         <div class="media text-muted pt-3 flex-grow-1">        
             <?= $meeting_post['meeting_description'] ?>
