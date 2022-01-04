@@ -20,28 +20,6 @@
 								<div class="card-text">値段・日時・いいね</div>
 							</div>
 						</div>
-					</div>
-						
-					<div class="col-4">
-						<div class="card" style="width: 15rem;">
-							<img src="images/orihinal.png" class="card-img-top">
-							<div class="card-body">
-								<div class="card-text">タイトル</div>
-								<div class="card-text">注所</div>
-								<div class="card-text">値段・日時・いいね</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-4">
-						<div class="card" style="width: 15rem;">
-							<img src="images/orihinal.png" class="card-img-top">
-							<div class="card-body">
-								<div class="card-text">タイトル</div>
-								<div class="card-text">注所</div>
-								<div class="card-text">値段・日時・いいね</div>
-							</div>
-						</div>
 					</div>		
 				</div>
 			</div>
@@ -74,11 +52,75 @@
 							</a>
 						</div>					
 					<?php endforeach; ?>
+					<div id="meetingTable"></div>
 				</div>
 			</div>
-			<a class="card-footer text-muted" href="##">
-				더보기
-			</a>
+			<div class="card-footer text-muted" id="more_meeting" style="cursor: pointer">
+				<div id="spinner">
+					더보기
+				</div>
+			</div>
 		</div>	
 	</div>
+
+	<script>
+		let meeting_post_num = <?= count($meeting_posts) ?>;
+        let btn = document.getElementById('more_meeting');
+        btn.addEventListener('click', ()=> {
+            // this.saveMeeting();
+			console.log(meeting_post_num);
+			this.reloadTable();
+        });
+
+		
+
+        function reloadTable() {
+			let data = {
+				offset: meeting_post_num,				
+			}
+
+            $.ajax({
+				type: "POST",
+                url: "<?php echo site_url('fetch/meeting'); ?>",  
+				data: data,           
+                beforeSend: function (f) {
+					$('#spinner').html('');
+                    $('#spinner').addClass('spinner-border');
+                },
+                success: function (data) {
+					$('#spinner').removeClass('spinner-border');
+					$('#spinner').html('더보기');
+                    $('#meetingTable').append(data);
+					meeting_post_num += 4;
+                }
+            })
+        }
+
+        // function saveMeeting() {
+        //     let data = {
+        //         comment: $("#comment").val(),
+        //         blog_id: $("#blog_id").val(),
+        //     }
+
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "<?php echo site_url('fetch/meeting'); ?>",
+        //         data:data,
+        //         beforeSend: function (f) {
+        //             $('#userTable').html('Load Table ...');
+        //         },
+        //         success: function (data) {
+        //             if (data[0] !== "<") {
+        //                 alert(JSON.parse(data).error.comment);
+        //             } else {
+        //                 $('#userTable').html(data);
+        //                 $('#comment').val('');  
+        //             }
+        //         },
+        //         error: function(error) { // if error occured
+        //             alert(error);
+        //         },
+        //     })
+        // }
+    </script>
 <?= $this->endSection() ?>

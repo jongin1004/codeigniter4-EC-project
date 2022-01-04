@@ -51,6 +51,10 @@ $routes->get('register', 'RegisterController::index');
 $routes->post('register', 'RegisterController::register');
 $routes->get('logout', 'AuthController::logout');
 
+
+$routes->post('fetch/meeting', 'FetchController::index');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

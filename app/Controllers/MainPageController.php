@@ -12,7 +12,7 @@ class MainPageController extends BaseController
         // $saleModel = model('SaleModel');
         $meeting_posts = $meetingModel->where('is_delete <>', 'y')
                                     ->orderBy('meeting_id', 'desc')
-                                    ->findAll();
+                                    ->findAll(3, 0);
                                     
         echo view('product_list', [
             'meeting_posts' => $meeting_posts,
