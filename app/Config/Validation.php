@@ -59,7 +59,7 @@ class Validation
 
     public $register = [
         'user_name'        => 'required|alpha_numeric',
-        'user_email'       => 'required|is_unique[users.user_email]',
+        'user_email'       => 'required|valid_email|is_unique[users.user_email]',
         'user_password'    => 'required|min_length[4]|max_length[12]|matches[password_confirm]',
         'password_confirm' => 'required'
     ];

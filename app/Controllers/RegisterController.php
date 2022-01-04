@@ -39,6 +39,6 @@ class RegisterController extends BaseController
             echo "실패";
         }
 
-        return redirect()->to(base_url('login'));
+        return redirect()->to(base_url('login?URL='.base_url()));
     }
 }
