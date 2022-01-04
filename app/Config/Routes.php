@@ -45,6 +45,9 @@ $routes->group('meeting', function ($routes)
 });
 
 $routes->get('login', 'AuthController::index');
+$routes->post('login', 'AuthController::authentication');
+$routes->get('register', 'RegisterController::index');
+$routes->post('register', 'RegisterController::register');
 
 /*
  * --------------------------------------------------------------------

@@ -15,7 +15,9 @@
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('login?URL='.current_urL()) ?>">Login</a>
         </li>
-        
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('register') ?>">Register</a>
+        </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
