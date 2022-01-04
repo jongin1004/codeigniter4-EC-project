@@ -32,12 +32,19 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'MainPageController::index');
-$routes->get('/meeting/new', 'MeetingController::createForm');
-$routes->post('/meeting/new', 'MeetingController::create');
-$routes->get('/meeting/(:num)', 'MeetingController::showDetail/$1');
-$routes->get('/meeting/(:num)/modify', 'MeetingController::modifyForm/$1');
-$routes->post('/meeting/(:num)/modify', 'MeetingController::modify/$1');
-$routes->get('/meeting/(:num)/delete', 'MeetingController::delete/$1');
+
+
+$routes->group('meeting', function ($routes)
+{
+    $routes->get('new', 'MeetingController::createForm');
+    $routes->post('new', 'MeetingController::create');
+    $routes->get('(:num)', 'MeetingController::showDetail/$1');
+    $routes->get('(:num)/modify', 'MeetingController::modifyForm/$1');
+    $routes->post('(:num)/modify', 'MeetingController::modify/$1');
+    $routes->get('(:num)/delete', 'MeetingController::delete/$1');
+});
+
+$routes->get('login', 'AuthController::index');
 
 /*
  * --------------------------------------------------------------------
