@@ -42,7 +42,6 @@ class Validation
     //--------------------------------------------------------------------
 
     public $meeting_create = [
-        'user_id'             => 'required',
         'category_id'         => 'required|is_not_unique[categories.category_id]',
         'meeting_title'       => 'required',
         'meeting_description' => 'required'
@@ -62,5 +61,11 @@ class Validation
         'user_email'       => 'required|valid_email|is_unique[users.user_email]',
         'user_password'    => 'required|min_length[4]|max_length[12]|matches[password_confirm]',
         'password_confirm' => 'required'
+    ];
+
+    public $comment = [
+        'user_id'             => 'required',
+        'meeting_id'          => 'required',
+        'comment_description' => 'required'
     ];
 }

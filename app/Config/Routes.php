@@ -51,8 +51,15 @@ $routes->get('register', 'RegisterController::index');
 $routes->post('register', 'RegisterController::register');
 $routes->get('logout', 'AuthController::logout');
 
+// ajax
+// get More data of meeting_post 
+$routes->post('fetch/meeting', 'FetchController::getMore');
+// save comment
+$routes->post('fetch/comment', 'FetchController::saveComment');
+// $routes->get('fetch/comment', 'FetchController::saveComment');
 
-$routes->post('fetch/meeting', 'FetchController::index');
+// comment
+$routes->post('comment', 'CommentController::save', ['filter' => 'auth']);
 
 
 /*

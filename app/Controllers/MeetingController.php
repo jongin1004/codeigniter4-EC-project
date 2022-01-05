@@ -8,6 +8,7 @@ class MeetingController extends BaseController
 {
     protected $categoryModel;
     protected $meetingModel;
+    protected $commentModel;
     protected $db;
 
     function __construct()
@@ -15,11 +16,13 @@ class MeetingController extends BaseController
         $this->db = db_connect();
         $this->categoryModel = model('CategoryModel');
         $this->meetingModel = model('MeetingModel');
+        $this->commentModel = model('CommentModel');
     }
 
     public function index()
     {
-        
+        $result = $this->commentModel->getsCommentAndUser(6);
+        var_dump($result);
     }
 
     public function createForm()
@@ -33,7 +36,8 @@ class MeetingController extends BaseController
 
     public function create()
     {
-        helper('form');
+        // helper('form');
+        $session = session();
         $validation = service('validation');
         $getPost = $this->request->getPost();
         $getPost['user_id'] = 1;        
@@ -49,7 +53,7 @@ class MeetingController extends BaseController
         }
 
         $data = [
-            'user_id' => 1,
+            'user_id' => $session->get('user_id'),
             'category_id' => $getPost['category_id'],
             'meeting_title' => $getPost['meeting_title'],
             'meeting_description' => $getPost['meeting_description'],
@@ -68,9 +72,11 @@ class MeetingController extends BaseController
     public function showDetail($id = null)
     {   
         $meeting_post = $this->meetingModel->find($id);
+        $meeting_comments = $this->commentModel->getsCommentAndUser($id);
 
         echo view('meeting/showDetail', [
-            'meeting_post' => $meeting_post
+            'meeting_post' => $meeting_post,
+            'meeting_comments' => $meeting_comments,
         ]);
     }
 
@@ -86,10 +92,10 @@ class MeetingController extends BaseController
 
     public function modify($id = null)
     {
-        helper('form');
+        // helper('form');
+        $session = session();
         $validation = service('validation');
         $getPost = $this->request->getPost();
-        $getPost['user_id'] = 1;
 
         if (!$validation->run($getPost, 'meeting_create')) {
             $meeting_post = $this->meetingModel->find($id);
@@ -103,7 +109,7 @@ class MeetingController extends BaseController
         } 
 
         $data = [
-            'user_id' => $getPost['user_id'],
+            'user_id' => $session->get('user_id'),
             'category_id' => $getPost['category_id'],
             'meeting_title' => $getPost['meeting_title'],
             'meeting_description' => $getPost['meeting_description'],

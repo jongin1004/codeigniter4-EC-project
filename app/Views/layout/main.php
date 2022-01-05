@@ -40,6 +40,11 @@
         placeholder: '内容を入力してください。',        
         height: 250
       });
+
+      $('#summernote_comment').summernote({
+        placeholder: '内容を入力してください。',        
+        height: 100
+      });
     </script>
 </body>
 </html>
