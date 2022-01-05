@@ -67,14 +67,12 @@
 		let meeting_post_num = <?= count($meeting_posts) ?>;
         let btn = document.getElementById('more_meeting');
         btn.addEventListener('click', ()=> {
-            // this.saveMeeting();
-			console.log(meeting_post_num);
-			this.reloadTable();
+			this.getMorePost();
         });
 
 		
 
-        function reloadTable() {
+        function getMorePost() {
 			let data = {
 				offset: meeting_post_num,				
 			}

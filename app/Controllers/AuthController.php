@@ -8,6 +8,11 @@ class AuthController extends BaseController
 {
     public function index()
     {
+        $session = session();
+        if ($session->get('is_login')) {
+            return redirect()->to(base_url());
+        }
+        
         echo view('auth/loginForm');
     }
 

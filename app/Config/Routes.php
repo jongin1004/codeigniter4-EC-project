@@ -31,7 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'MainPageController::index');
+$routes->get('/', 'MainPageController::index', ['as' => 'mainPage']);
 
 
 $routes->group('meeting', function ($routes)
@@ -39,9 +39,9 @@ $routes->group('meeting', function ($routes)
     $routes->get('new', 'MeetingController::createForm', ['filter' => 'auth']);
     $routes->post('new', 'MeetingController::create', ['filter' => 'auth']);
     $routes->get('(:num)', 'MeetingController::showDetail/$1');
-    $routes->get('(:num)/modify', 'MeetingController::modifyForm/$1');
-    $routes->post('(:num)/modify', 'MeetingController::modify/$1');
-    $routes->get('(:num)/delete', 'MeetingController::delete/$1');
+    $routes->get('(:num)/modify', 'MeetingController::modifyForm/$1', ['filter' => 'isOwnUser']);
+    $routes->post('(:num)/modify', 'MeetingController::modify/$1', ['filter' => 'isOwnUser']);
+    $routes->get('(:num)/delete', 'MeetingController::delete/$1', ['filter' => 'isOwnUser']);
 });
 
 // login/register 관련 
