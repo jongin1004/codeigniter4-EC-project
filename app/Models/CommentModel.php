@@ -11,10 +11,10 @@ class CommentModel extends Model
     protected $allowedFields    = ['user_id', 'meeting_id', 'comment_description'];
 
     // Dates
-    // protected $useTimestamps = false;
-    // protected $dateFormat    = 'datetime';
-    // protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 
 
     public function getsCommentAndUser($id)

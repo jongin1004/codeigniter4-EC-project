@@ -32,6 +32,10 @@ class AddMeetingComment extends Migration
                 'type' => 'TIMESTAMP',
                 'null' => true                
             ],
+            'updated_at' => [
+                'type' => 'TIMESTAMP',
+                'null' => true                
+            ],            
             'is_delete' => [
                 'type'       => 'ENUM',
                 'constraint' => "'y','n'",

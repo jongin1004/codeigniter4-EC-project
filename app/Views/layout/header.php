@@ -9,10 +9,7 @@
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>">Link</a>
-        </li>
+        </li>        
         <?php if($session->get('is_login') !== true): ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('login?URL='.current_urL()) ?>">Login</a>
@@ -23,6 +20,9 @@
         <?php endif; ?>
 
         <?php if($session->get('is_login') === true): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('dashboard') ?>">Dashboard</a>
+            </li>            
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
             </li>

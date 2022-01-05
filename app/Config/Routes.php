@@ -56,10 +56,14 @@ $routes->get('logout', 'AuthController::logout');
 $routes->post('fetch/meeting', 'FetchController::getMore');
 // save comment
 $routes->post('fetch/comment', 'FetchController::saveComment');
-// $routes->get('fetch/comment', 'FetchController::saveComment');
+// crop image
+$routes->post('fetch/cropImage', 'CropImageUpload::store');
 
 // comment
 $routes->post('comment', 'CommentController::save', ['filter' => 'auth']);
+
+// dashboard
+$routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
 
 
 /*
@@ -78,3 +82,4 @@ $routes->post('comment', 'CommentController::save', ['filter' => 'auth']);
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+
