@@ -12,7 +12,7 @@
 			<div class="card-body">
 				<div class="row">
 					<?php foreach ($sale_posts as $sale_post) : ?>
-						<div class="col-4">
+						<div class="col-4 mb-3">
 							<div class="card" style="width: 15rem;">
 								<img src="images/orihinal.png" class="card-img-top">
 								<div class="card-body">
@@ -22,11 +22,14 @@
 							</div>
 						</div>		
 					<?php endforeach; ?>
+					<div id="saleTable"></div>
 				</div>
-			</div>			
-			<a class="card-footer text-muted" href="##">
-				더보기
-			</a>
+			</div>
+			<div class="card-footer text-muted" id="more_sale" style="cursor: pointer">
+				<div id="spinner-sale">
+					더보기
+				</div>
+			</div>
 		</div>
 
 		<!-- Meeting Post -->
@@ -57,7 +60,7 @@
 				</div>
 			</div>
 			<div class="card-footer text-muted" id="more_meeting" style="cursor: pointer">
-				<div id="spinner">
+				<div id="spinner-meeting">
 					더보기
 				</div>
 			</div>
@@ -65,15 +68,16 @@
 	</div>
 
 	<script>
+		// get more - meeting post
 		let meeting_post_num = <?= count($meeting_posts) ?>;
-        let btn = document.getElementById('more_meeting');
-        btn.addEventListener('click', ()=> {
-			this.getMorePost();
+        let moreBtn_meeting = document.getElementById('more_meeting');
+        moreBtn_meeting.addEventListener('click', ()=> {
+			this.getMoreMeeting();
         });
 
 		
 
-        function getMorePost() {
+        function getMoreMeeting() {
 			let data = {
 				offset: meeting_post_num,				
 			}
@@ -83,43 +87,47 @@
                 url: "<?php echo site_url('fetch/meeting'); ?>",  
 				data: data,           
                 beforeSend: function (f) {
-					$('#spinner').html('');
-                    $('#spinner').addClass('spinner-border');
+					$('#spinner-meeting').html('');
+                    $('#spinner-meeting').addClass('spinner-border');
                 },
                 success: function (data) {
-					$('#spinner').removeClass('spinner-border');
-					$('#spinner').html('더보기');
+					$('#spinner-meeting').removeClass('spinner-border');
+					$('#spinner-meeting').html('더보기');
                     $('#meetingTable').append(data);
-					meeting_post_num += 4;
+					meeting_post_num += 3;
                 }
             })
         }
 
-        // function saveMeeting() {
-        //     let data = {
-        //         comment: $("#comment").val(),
-        //         blog_id: $("#blog_id").val(),
-        //     }
+		// get more - sale post
+		let sale_post_num = <?= count($sale_posts) ?>;
+        let moreBtn_sale = document.getElementById('more_sale');
+        moreBtn_sale.addEventListener('click', ()=> {
+			this.getMoreSale();
+        });
 
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "<?php echo site_url('fetch/meeting'); ?>",
-        //         data:data,
-        //         beforeSend: function (f) {
-        //             $('#userTable').html('Load Table ...');
-        //         },
-        //         success: function (data) {
-        //             if (data[0] !== "<") {
-        //                 alert(JSON.parse(data).error.comment);
-        //             } else {
-        //                 $('#userTable').html(data);
-        //                 $('#comment').val('');  
-        //             }
-        //         },
-        //         error: function(error) { // if error occured
-        //             alert(error);
-        //         },
-        //     })
-        // }
+		
+
+        function getMoreSale() {			
+			let data = {
+				offset: sale_post_num,				
+			}
+
+            $.ajax({
+				type: "POST",
+                url: "<?php echo site_url('fetch/sale'); ?>",  
+				data: data,           
+                beforeSend: function (f) {
+					$('#spinner-sale').html('');
+                    $('#spinner-sale').addClass('spinner-border');
+                },
+                success: function (data) {
+					$('#spinner-sale').removeClass('spinner-border');
+					$('#spinner-sale').html('더보기');
+                    $('#saleTable').append(data);
+					sale_post_num += 3;
+                }
+            })
+        }        
     </script>
 <?= $this->endSection() ?>

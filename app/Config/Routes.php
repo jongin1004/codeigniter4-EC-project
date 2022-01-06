@@ -64,7 +64,9 @@ $routes->get('logout', 'AuthController::logout');
 
 // ajax
 // get More data of meeting_post 
-$routes->post('fetch/meeting', 'FetchController::getMore');
+$routes->post('fetch/meeting', 'FetchController::getMoreMeeting');
+// get More data of sale_post 
+$routes->post('fetch/sale', 'FetchController::getMoreSale');
 // save comment
 $routes->post('fetch/comment', 'FetchController::saveComment');
 // crop image

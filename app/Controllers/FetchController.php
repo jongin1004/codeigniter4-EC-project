@@ -6,7 +6,20 @@ use App\Controllers\BaseController;
 
 class FetchController extends BaseController
 {
-    public function getMore()
+    public function getMoreSale()
+    {
+        $offset = $this->request->getPost('offset');        
+        $saleModel = model('SaleModel');
+        $sale_posts = $saleModel->where('is_delete <>', 'y')
+                                    ->orderby('sale_id', 'desc')
+                                    ->findAll(4, $offset); // findall(가져올 숫자, offset);        
+
+        echo view('sale/saleList', [
+            'sale_posts' => $sale_posts
+        ]);
+    }
+
+    public function getMoreMeeting()
     {
         $offset = $this->request->getPost('offset');        
         $meetingModel = model('MeetingModel');
