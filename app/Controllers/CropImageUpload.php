@@ -13,33 +13,28 @@ class CropImageUpload extends BaseController
  
     public function store()
     {  
-        // helper(['form', 'url']);
+        // session / model 선언부
         $session = session();
-        $avatarModel = model('Avatar');
+        $avatarModel = model('Avatar');        
 
-        // var_dump($this->request->getPost('image'));
-        // exit;
-        // $builder = $this->db->table('avatar');
-
-
+        // parse data of image
         $imageData = $this->request->getPost('image');
         $image_array_1 = explode(";", $imageData);
         $image_array_2 = explode(",", $image_array_1[1]);
         $imageData = base64_decode($image_array_2[1]);
 
+        // image -> public/images위치에 저장
         $imageName = time() . '.png';
+        file_put_contents('images/'.$imageName, $imageData);
+        // db에 저장하기 위해서 image 이름을 가져옴 
+        $image_file = addslashes(file_get_contents('images/'.$imageName));
 
-        file_put_contents($imageName, $imageData);
-
-        $image_file = addslashes(file_get_contents($imageName));
-
+        // insert to db
         $data = [
             'user_id' => $session->get('user_id'),
-            'avatar_title' => $image_file,
+            'avatar_title' => $imageName,
         ];
-
-        $avatarModel->insert($data);
-        // $save = $builder->insert(['title' =>  $image_file]);
+        $avatarModel->insert($data);        
 
         $response = [
             'success' => true,            
@@ -47,7 +42,6 @@ class CropImageUpload extends BaseController
         ];
     
 
-        return $this->response->setJSON($response);
-        
+        return $this->response->setJSON($response);        
     }
 }

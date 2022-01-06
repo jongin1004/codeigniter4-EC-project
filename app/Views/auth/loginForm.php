@@ -1,8 +1,8 @@
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('content') ?>
-    <div class=" d-flex flex-column justify-content-center py-7" style="height: 100vh;">
-        <form action="<?= base_url('login?URL='.esc($_GET['URL'], 'url')) ?>" method="post" class="form-signin">
+    <div class="d-flex flex-column justify-content-center py-7" style="height: 100vh;">
+        <form action="<?= base_url('login?URL='.esc($_GET['URL'], 'url')) ?>" method="post" class="form-signin" style="width: 50%; margin: 0 auto;">
             <div class="text-center mb-4">
                 <img class="mb-4" src="/docs/4.6/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">Login</h1>

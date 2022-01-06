@@ -22,8 +22,8 @@
                                 <td><?= $user['user_email'] ?></td>
                             </tr>
                             <tr>
-                                <th scope="row"></th>                                                        
-                                <td>@twitter</td>
+                                <th scope="row">아바타</th>                                                        
+                                <td><img src="<?= "images/".$user['avatar_title'] ?>" alt="아바타를 설정해주세요."></td>
                             </tr>
                         </tbody>
                     </table>

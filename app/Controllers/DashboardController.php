@@ -11,10 +11,9 @@ class DashboardController extends BaseController
         $session = session();
         $userModel = model('UserModel');
 
-        $user = $userModel->find($session->get('user_id'));
-
-        echo view('dashboard/cropImageForm', [
-            'user' => $user
+        $user = $userModel->getUserAndAvatar($session->get('user_id'));
+        echo view('dashboard/userInfo', [
+            'user' => $user[0]
         ]);
     }
 }

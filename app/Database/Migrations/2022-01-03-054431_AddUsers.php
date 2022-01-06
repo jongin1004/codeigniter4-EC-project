@@ -52,13 +52,17 @@ class AddUsers extends Migration
                 'type' => 'TIMESTAMP',
                 'null' => true,
             ],
+            'updated_at' => [
+                'type' => 'TIMESTAMP',
+                'null' => true,
+            ],
             'is_delete' => [
                 'type'       => 'ENUM',
                 'constraint' => "'y','n'",
                 'default'    => 'n',  
             ],
         ]);
-        $this->forge->addPrimaryKey('user_id');
+        $this->forge->addPrimaryKey('user_id');        
         $this->forge->createTable('users');
     }
 
