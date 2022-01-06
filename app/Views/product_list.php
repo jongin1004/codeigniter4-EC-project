@@ -13,17 +13,19 @@
 				<div class="row">
 					<?php foreach ($sale_posts as $sale_post) : ?>
 						<div class="col-4 mb-3">
-							<div class="card" style="width: 15rem;">
-								<img src="images/orihinal.png" class="card-img-top">
-								<div class="card-body">
-									<div class="card-text"><?= $sale_post['sale_title'] ?></div>									
-									<div class="card-text"><small><?= $sale_post['created_at'] ?></small></div>
+							<a href="<?= base_url('sale/'.$sale_post['sale_id']) ?>">
+								<div class="card" style="width: 15rem;">
+									<img src="images/orihinal.png" class="card-img-top">
+									<div class="card-body">
+										<div class="card-text"><?= $sale_post['sale_title'] ?></div>									
+										<div class="card-text"><small><?= $sale_post['created_at'] ?></small></div>
+									</div>
 								</div>
-							</div>
+							</a>
 						</div>		
-					<?php endforeach; ?>
-					<div id="saleTable"></div>
+					<?php endforeach; ?>					
 				</div>
+				<div id="saleTable"></div>
 			</div>
 			<div class="card-footer text-muted" id="more_sale" style="cursor: pointer">
 				<div id="spinner-sale">

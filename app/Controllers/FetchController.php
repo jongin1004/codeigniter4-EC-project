@@ -12,7 +12,7 @@ class FetchController extends BaseController
         $saleModel = model('SaleModel');
         $sale_posts = $saleModel->where('is_delete <>', 'y')
                                     ->orderby('sale_id', 'desc')
-                                    ->findAll(4, $offset); // findall(가져올 숫자, offset);        
+                                    ->findAll(3, $offset); // findall(가져올 숫자, offset);        
 
         echo view('sale/saleList', [
             'sale_posts' => $sale_posts
@@ -25,7 +25,7 @@ class FetchController extends BaseController
         $meetingModel = model('MeetingModel');
         $meeting_posts = $meetingModel->where('is_delete <>', 'y')
                                     ->orderby('meeting_id', 'desc')
-                                    ->findAll(4, $offset); // findall(가져올 숫자, offset);        
+                                    ->findAll(3, $offset); // findall(가져올 숫자, offset);        
 
         echo view('meeting/meetingList', [
             'meeting_posts' => $meeting_posts
