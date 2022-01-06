@@ -79,10 +79,11 @@ class SaleController extends BaseController
 
     public function modifyForm($id = null)
     {
+        helper('form');
         $categories = $this->categoryModel->where('category_type', 'sale')->findAll();
-        $meeting_post = $this->meetingModel->find($id);
-        echo view('meeting/modifyForm', [
-            'meeting_post' => $meeting_post,
+        $sale_post = $this->saleModel->find($id);        
+        echo view('sale/modifyForm', [
+            'sale_post' => $sale_post,
             'categories' => $categories,
         ]);
     }
@@ -93,28 +94,34 @@ class SaleController extends BaseController
         $session = session();
         $validation = service('validation');
         $getPost = $this->request->getPost();
-
-        if (!$validation->run($getPost, 'meeting_create')) {
-            $meeting_post = $this->meetingModel->find($id);
+        $getPost['user_id'] = $session->get('user_id');
+        $getPost['file_id'] = 1;
+        
+        $is_validate = $validation->run($getPost, 'sale');        
+        if (!$is_validate) {
+            $sale_post = $this->saleModel->find($id);
             $categories = $this->categoryModel->where('category_type', 'sale')->findAll();
             $errors = $validation->getErrors();
-            echo view('meeting/modifyForm', [
+            echo view('sale/modifyForm', [
                 'categories' => $categories,
                 'errors' => $errors,
-                'meeting_post' => $meeting_post
+                'sale_post' => $sale_post
             ]);
-        } 
+        }
 
         $data = [
-            'user_id' => $session->get('user_id'),
+            'user_id' => $getPost['user_id'],
             'category_id' => $getPost['category_id'],
-            'meeting_title' => $getPost['meeting_title'],
-            'meeting_description' => $getPost['meeting_description'],
+            'file_id' => $getPost['file_id'],
+            'sale_title' => $getPost['sale_title'],
+            'sale_description' => $getPost['sale_description'],
+            'sale_state' => $getPost['sale_state'],
+            'sale_price' => $getPost['sale_price'],
         ];
 
-        $updateResult = $this->meetingModel->update($id, $data);
+        $updateResult = $this->saleModel->update($id, $data);        
         if ( $updateResult ) {
-            return redirect()->to(base_url('meeting/'.$id));
+            return redirect()->to(base_url('sale/'.$id));
         }        
     }
 

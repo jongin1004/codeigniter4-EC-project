@@ -49,9 +49,9 @@ $routes->group('sale', function ($routes)
     $routes->get('new', 'SaleController::createForm', ['filter' => 'auth']);
     $routes->post('new', 'SaleController::create', ['filter' => 'auth']);
     $routes->get('(:num)', 'SaleController::showDetail/$1');
-    $routes->get('(:num)/modify', 'SaleController::modifyForm/$1', ['filter' => 'isOwnUser']);
-    $routes->post('(:num)/modify', 'SaleController::modify/$1', ['filter' => 'isOwnUser']);
-    $routes->get('(:num)/delete', 'SaleController::delete/$1', ['filter' => 'isOwnUser']);
+    $routes->get('(:num)/modify', 'SaleController::modifyForm/$1');
+    $routes->post('(:num)/modify', 'SaleController::modify/$1');
+    $routes->get('(:num)/delete', 'SaleController::delete/$1');
 });
 
 
