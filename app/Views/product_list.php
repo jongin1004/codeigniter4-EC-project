@@ -4,7 +4,7 @@
 	<div class="py-7">
 		<div class="mb-2">
 			<a href="<?= base_url('/meeting/new') ?>" class="btn btn-primary">集まり</a>
-			<a href="#" class="btn btn-primary">販売</a>
+			<a href="<?= base_url('/sale/new') ?>" class="btn btn-primary">販売</a>
 		</div>
 		
 		<!-- Sale Post -->

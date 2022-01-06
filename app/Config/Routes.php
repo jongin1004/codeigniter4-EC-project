@@ -44,6 +44,17 @@ $routes->group('meeting', function ($routes)
     $routes->get('(:num)/delete', 'MeetingController::delete/$1', ['filter' => 'isOwnUser']);
 });
 
+$routes->group('sale', function ($routes)
+{
+    $routes->get('new', 'SaleController::createForm', ['filter' => 'auth']);
+    $routes->post('new', 'SaleController::create', ['filter' => 'auth']);
+    $routes->get('(:num)', 'SaleController::showDetail/$1');
+    $routes->get('(:num)/modify', 'SaleController::modifyForm/$1', ['filter' => 'isOwnUser']);
+    $routes->post('(:num)/modify', 'SaleController::modify/$1', ['filter' => 'isOwnUser']);
+    $routes->get('(:num)/delete', 'SaleController::delete/$1', ['filter' => 'isOwnUser']);
+});
+
+
 // login/register 관련 
 $routes->get('login', 'AuthController::index');
 $routes->post('login', 'AuthController::authentication');

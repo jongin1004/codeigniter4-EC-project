@@ -4,32 +4,24 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class MeetingController extends BaseController
+class SaleController extends BaseController
 {
     protected $categoryModel;
-    protected $meetingModel;
-    protected $commentModel;
+    protected $saleModel;    
     protected $db;
 
     function __construct()
     {
         $this->db = db_connect();
         $this->categoryModel = model('CategoryModel');
-        $this->meetingModel = model('MeetingModel');
-        $this->commentModel = model('CommentModel');
-    }
-
-    public function index()
-    {
-        $result = $this->commentModel->getsCommentAndUser(6);
-        var_dump($result);
+        $this->meetingModel = model('SaleModel');        
     }
 
     public function createForm()
     {        
-        $categories = $this->categoryModel->where('category_type', 'meeting')->findAll();
+        $categories = $this->categoryModel->where('category_type', 'sale')->findAll();
         
-        return view('meeting/createForm.php', [
+        return view('sale/createForm.php', [
             'categories' => $categories,
         ]);
     }
@@ -40,33 +32,40 @@ class MeetingController extends BaseController
         $session = session();
         $validation = service('validation');
         $getPost = $this->request->getPost();
-        $getPost['user_id'] = 1;        
-
-
-        if (! $validation->run($getPost, 'meeting_create')) {
-            $categories = $this->categoryModel->where('category_type', 'meeting')->findAll();
+        $getPost['user_id'] = $session->get('user_id');
+        $getPost['file_id'] = 1;
+        
+        $is_validate = $validation->run($getPost, 'sale');
+        if (!$is_validate) {
+            $categories = $this->categoryModel->where('category_type', 'sale')->findAll();
             $errors = $validation->getErrors();
-            echo view('meeting/createForm', [
+            echo view('sale/createForm', [
                 'errors' => $errors,
                 'categories' => $categories,
             ]);
-        }
+        }        
 
         $data = [
-            'user_id' => $session->get('user_id'),
+            'user_id' => $getPost['user_id'],
             'category_id' => $getPost['category_id'],
-            'meeting_title' => $getPost['meeting_title'],
-            'meeting_description' => $getPost['meeting_description'],
+            'file_id' => $getPost['file_id'],
+            'sale_title' => $getPost['sale_title'],
+            'sale_description' => $getPost['sale_description'],
+            'sale_state' => $getPost['sale_state'],
+            'sale_price' => $getPost['sale_price'],
         ];
 
-        $insertResult = $this->meetingModel->insert($data);
-        $meeting_id = $this->meetingModel->getInsertID();
+        $sale_id = $this->meetingModel->insert($data);
+        // $meeting_id = $this->meetingModel->getInsertID();
 
-        if (! $insertResult ) {
-            echo "성공";
+        if (! $sale_id ) {
+            echo "Error: can't insert";
+            exit;
         }
 
-        return redirect()->to(base_url('/meeting/'.$meeting_id));        
+        echo "Success: success insert";
+
+        // return redirect()->to(base_url('/sale/'.$sale_id));        
     }
 
     public function showDetail($id = null)
@@ -82,7 +81,7 @@ class MeetingController extends BaseController
 
     public function modifyForm($id = null)
     {
-        $categories = $this->categoryModel->where('category_type', 'meeting')->findAll();
+        $categories = $this->categoryModel->where('category_type', 'sale')->findAll();
         $meeting_post = $this->meetingModel->find($id);
         echo view('meeting/modifyForm', [
             'meeting_post' => $meeting_post,
@@ -99,7 +98,7 @@ class MeetingController extends BaseController
 
         if (!$validation->run($getPost, 'meeting_create')) {
             $meeting_post = $this->meetingModel->find($id);
-            $categories = $this->categoryModel->where('category_type', 'meeting')->findAll();
+            $categories = $this->categoryModel->where('category_type', 'sale')->findAll();
             $errors = $validation->getErrors();
             echo view('meeting/modifyForm', [
                 'categories' => $categories,

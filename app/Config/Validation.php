@@ -42,6 +42,7 @@ class Validation
     //--------------------------------------------------------------------
 
     public $meeting_create = [
+        'user_id'             => 'required',
         'category_id'         => 'required|is_not_unique[categories.category_id]',
         'meeting_title'       => 'required',
         'meeting_description' => 'required'
@@ -67,5 +68,14 @@ class Validation
         'user_id'             => 'required',
         'meeting_id'          => 'required',
         'comment_description' => 'required'
+    ];
+
+    public $sale = [
+        'user_id'             => 'required|is_not_unique[users.user_id]',
+        'category_id'         => 'required|is_not_unique[categories.category_id]',
+        'sale_title'          => 'required',
+        'sale_description'    => 'required',
+        'sale_state'          => 'required|in_list[b,m,w]',
+        'sale_price'          => 'required|integer'
     ];
 }
