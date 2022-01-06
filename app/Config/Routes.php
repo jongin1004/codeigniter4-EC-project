@@ -33,7 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'MainPageController::index', ['as' => 'mainPage']);
 
-
+// meeting post
 $routes->group('meeting', function ($routes)
 {
     $routes->get('new', 'MeetingController::createForm', ['filter' => 'auth']);
@@ -44,12 +44,13 @@ $routes->group('meeting', function ($routes)
     $routes->get('(:num)/delete', 'MeetingController::delete/$1', ['filter' => 'isOwnUser']);
 });
 
+// sale post
 $routes->group('sale', function ($routes)
 {
     $routes->get('new', 'SaleController::createForm', ['filter' => 'auth']);
     $routes->post('new', 'SaleController::create', ['filter' => 'auth']);
     $routes->get('(:num)', 'SaleController::showDetail/$1');
-    $routes->get('(:num)/modify', 'SaleController::modifyForm/$1');
+    $routes->get('(:num)/modify', 'SaleController::modifyForm/$1', ['filter' => 'isOwnUser']);
     $routes->post('(:num)/modify', 'SaleController::modify/$1');
     $routes->get('(:num)/delete', 'SaleController::delete/$1');
 });

@@ -23,9 +23,11 @@ class IsOwnUser implements FilterInterface
      *
      * @return mixed
      */
+
+    //  Before working on update/delete, 
+    //  check the current user is the same as the author of the article.
     public function before(RequestInterface $request, $arguments = null)
     {
-
         // session / model 선언
         $session = session();
   
@@ -36,25 +38,23 @@ class IsOwnUser implements FilterInterface
         $url_parser = explode('/', uri_string());
         $post_category = $url_parser[0];
         $post_id = $url_parser[1];
-        
-        // if ($post_category === 'meeting') {
-        //     $postModel = model('MeetingModel');
-        //     $post_user_id = $postModel->find($post_id)['user_id'];
-        // } else { // sale Post일 경우
-        //     // $postModel = model('SaleModel');
-        //     // $post_user_id = $postModel->find($post_id)['user_id'];
-        //     echo "sale Post";
-        // }
 
-        $postModel = model('MeetingModel');
-        $post_user_id = $postModel->find($post_id)['user_id'];
-
-        // verify logined
+         // verify logined
         if (!$session->get('is_login')) {
             echo "<script> alert('Loginしたあと利用してください。');window.location.assign('".base_url('login?URL='.current_url())."');</script>";
-        }
+        }        
+        
+        // branch out according to the category of the post 
+        if ($post_category === 'meeting') {
+            $meetingModel = model('MeetingModel');
+            $post_user_id = $meetingModel->find($post_id)['user_id'];
+            
+        } else { // sale Post일 경우
+            $saleModel = model('SaleModel');
+            $post_user_id = $saleModel->find($post_id)['user_id'];                        
+        }        
 
-        // Check if this is the current user's.
+        // Check if this post is the current user's.
         if (!($post_user_id === $current_user_id)) {
             echo "<script> alert('作成者だけが利用できる機能です。');window.location.assign('".previous_url()."');</script>";
         }
