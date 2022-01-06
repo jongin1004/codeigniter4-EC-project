@@ -128,10 +128,11 @@ class SaleController extends BaseController
         $data = [
             'is_delete' => 'y',
         ];
+
         $deleteResult = $this->saleModel->update($id, $data);
 
         if (! $deleteResult ) {
-            echo "삭제실패";
+            echo "Error: can't delete";
             exit;
         }
 
