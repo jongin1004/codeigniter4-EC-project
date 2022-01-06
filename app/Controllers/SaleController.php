@@ -55,17 +55,15 @@ class SaleController extends BaseController
             'sale_price' => $getPost['sale_price'],
         ];
 
-        $sale_id = $this->meetingModel->insert($data);
-        // $meeting_id = $this->meetingModel->getInsertID();
+        $sale_id = $this->saleModel->insert($data);
+        // $meeting_id = $this->saleModel->getInsertID();
 
         if (! $sale_id ) {
             echo "Error: can't insert";
             exit;
         }
-
-        echo "Success: success insert";
-
-        // return redirect()->to(base_url('/sale/'.$sale_id));        
+    
+        return redirect()->to(base_url('/sale/'.$sale_id));        
     }
 
     public function showDetail($id = null)
@@ -130,7 +128,7 @@ class SaleController extends BaseController
         $data = [
             'is_delete' => 'y',
         ];
-        $deleteResult = $this->meetingModel->update($id, $data);
+        $deleteResult = $this->saleModel->update($id, $data);
 
         if (! $deleteResult ) {
             echo "삭제실패";
