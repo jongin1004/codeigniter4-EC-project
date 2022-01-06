@@ -16,4 +16,15 @@ class DashboardController extends BaseController
             'user' => $user[0]
         ]);
     }
+
+    public function avatar()
+    {
+        $session = session();
+        $userModel = model('UserModel');
+
+        $user = $userModel->getUserAndAvatar($session->get('user_id'));
+        echo view('dashboard/cropImageForm', [
+            'user' => $user[0]
+        ]);
+    }
 }

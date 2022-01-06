@@ -34,7 +34,10 @@ class CropImageUpload extends BaseController
             'user_id' => $session->get('user_id'),
             'avatar_title' => $imageName,
         ];
-        $avatarModel->insert($data);        
+
+        var_dump($avatarModel->saveAvatar($data['user_id'], $data));
+        exit;
+        // $avatarModel->insert($data);        
 
         $response = [
             'success' => true,            

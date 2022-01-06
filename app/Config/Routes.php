@@ -65,6 +65,9 @@ $routes->post('comment', 'CommentController::save', ['filter' => 'auth']);
 // dashboard
 $routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
 
+// avatar
+$routes->get('avatar', 'DashboardController::avatar', ['filter' => 'auth']);
+
 
 /*
  * --------------------------------------------------------------------

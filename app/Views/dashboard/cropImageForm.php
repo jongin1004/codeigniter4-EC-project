@@ -1,16 +1,16 @@
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('content') ?>
-    <div class="py-7 row">
+    <div class="py-7 row" style="height: 100vh;">
         <div class="col-8">
             <div class="d-flex flex-column p-3 bg-white rounded shadow-sm" style="min-height: 600px;">
-                <h5 class="border-bottom border-gray pb-2 mb-0">User Information</h5>
+                <h5 class="border-bottom border-gray pb-2 mb-0">Avatar 設定</h5>
                 <div class="media text-muted pt-3 flex-grow-1">
                     <!-- image upload form -->
                     <div class="container mt-5">
                         <div class="card">
-                            <div class="card-header">
-                                jQuery Crop and Resize Image Before Upload in PHP Codeigniter 4  
+                            <div class="card-header text-center">
+                                <img src="<?= "images/".$user['avatar_title'] ?>" alt="아바타를 설정해주세요.">
                             </div>
                             <div class="card-body">
                                 <input type="file" name="before_crop_image" id="before_crop_image" accept="image/*" />
@@ -94,7 +94,11 @@
                             console.log(data);
                             $('#imageModel').modal('hide');
                             alert('Crop image has been uploaded');
-                        }
+                            location.reload();
+                        },
+                        error: function(error) { // if error occured
+                            console.log(error);
+                        },
                     })
                 });
             });
