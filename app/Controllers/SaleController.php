@@ -14,7 +14,7 @@ class SaleController extends BaseController
     {
         $this->db = db_connect();
         $this->categoryModel = model('CategoryModel');
-        $this->meetingModel = model('SaleModel');        
+        $this->saleModel = model('SaleModel');        
     }
 
     public function createForm()
@@ -70,12 +70,10 @@ class SaleController extends BaseController
 
     public function showDetail($id = null)
     {   
-        $meeting_post = $this->meetingModel->find($id);
-        $meeting_comments = $this->commentModel->getsCommentAndUser($id);
+        $sale_post = $this->saleModel->find($id);        
 
-        echo view('meeting/showDetail', [
-            'meeting_post' => $meeting_post,
-            'meeting_comments' => $meeting_comments,
+        echo view('sale/showDetail', [
+            'sale_post' => $sale_post,            
         ]);
     }
 
