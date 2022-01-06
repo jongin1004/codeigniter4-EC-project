@@ -27,7 +27,7 @@
         </div>
 
         <div class="text-right">
-            <a href="<?= base_url('shoppingCart') ?>" class="btn btn-primary">お気に入り</a>
+            <a href="<?= base_url('shoppingCart/'.$sale_post['sale_id']) ?>" class="btn btn-primary">お気に入り</a>
             <a href="<?= base_url('') ?>" class="btn btn-danger">チャット</a>
         </div> 
 <?= $this->endSection() ?>

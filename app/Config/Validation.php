@@ -78,4 +78,9 @@ class Validation
         'sale_state'          => 'required|in_list[b,m,w]',
         'sale_price'          => 'required|integer'
     ];
+
+    public $shoppingCart = [
+        'user_id'             => 'required|is_not_unique[users.user_id]',
+        'sale_id'          => 'required|is_not_unique[sale_post.sale_id]',        
+    ];
 }

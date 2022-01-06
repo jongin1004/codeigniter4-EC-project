@@ -81,6 +81,8 @@ $routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
 
 // avatar
 $routes->get('avatar', 'DashboardController::avatar', ['filter' => 'auth']);
+// shopping-cart
+$routes->get('shoppingCart/(:num)', 'ShoppingCartController::addItem/$1', ['filter' => 'auth']);
 
 
 /*
