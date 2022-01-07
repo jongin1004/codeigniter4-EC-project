@@ -50,10 +50,9 @@ class AddressController extends BaseController
             echo "Error: can't insert";
         }
 
-        $address = $addressModel->find($insert_id);
-        var_dump($address);
-        // echo view('buy/addressList', [
-        //     'address' => $address
-        // ])
+        $address = $addressModel->find($insert_id);        
+        echo view('address/addressList', [
+            'address' => $address
+        ]);
     }
 }

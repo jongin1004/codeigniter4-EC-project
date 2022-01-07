@@ -9,14 +9,7 @@
             <form action="<?= base_url('buy/payment') ?>" method="post">
                 <!-- adress -->
                 <h6 class="border-bottom border-gray pb-2 mb-2">注所</h6>
-                <div class="form-group">
-                    <select class="form-control">
-                        <?php foreach ($addresses as $address) : ?>
-                            <option><?= $address['fullAddress'] ?></option>                            
-                        <?php endforeach; ?>
-                            <span id="addressTable"></span>
-                    </select>
-                </div>
+                <?= $this->include('address/address') ?>
 
                 <div class="form-row">
                     <div class="form-group col-md-10">
@@ -104,8 +97,8 @@
                 url: "<?php echo site_url('fetch/address'); ?>",  
 				data: data,           
                 success: function (data) {					
-                    $('#addressTable').append(data);
-                    console.log(data);
+                    $('#address_select').append(data);
+                    alert('注所が追加されました。上で選択してください。');
                 },
                 error: function(error) { // if error occured
                     console.log(error);
