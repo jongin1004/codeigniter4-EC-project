@@ -83,4 +83,10 @@ class Validation
         'user_id'             => 'required|is_not_unique[users.user_id]',
         'sale_id'          => 'required|is_not_unique[sale_post.sale_id]',        
     ];
+
+    public $chat = [
+        'to_id'           => 'required|is_not_unique[users.user_id]',
+        'from_id'         => 'required|is_not_unique[users.user_id]',        
+        'chat_message'    => 'required'
+    ];
 }
