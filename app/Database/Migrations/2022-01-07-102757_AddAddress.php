@@ -20,9 +20,13 @@ class AddAddress extends Migration
                 'constraint'     => 5,
                 'unsigned'       => true,
             ],
-            'address' => [
+            'fullAddress' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 150,                
+            ],
+            'zipNo' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 10,                
             ],
             'created_at' => [
                 'type' => 'TIMESTAMP',
@@ -31,12 +35,15 @@ class AddAddress extends Migration
             'updated_at' => [
                 'type' => 'TIMESTAMP',
                 'null' => true,                
-            ],
+            ]            
         ]);
+        $this->forge->addPrimaryKey('address_id');
+        $this->forge->addForeignKey('user_id', 'users', 'user_id');        
+        $this->forge->createTable('address');
     }
 
     public function down()
     {
-        //
+        $this->forge->dropTable('address');
     }
 }

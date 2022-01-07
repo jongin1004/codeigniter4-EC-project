@@ -42,7 +42,7 @@ class Validation
     //--------------------------------------------------------------------
 
     public $meeting_create = [
-        'user_id'             => 'required',
+        'user_id'             => 'required|is_not_unique[users.user_id]',
         'category_id'         => 'required|is_not_unique[categories.category_id]',
         'meeting_title'       => 'required',
         'meeting_description' => 'required'
@@ -65,28 +65,34 @@ class Validation
     ];
 
     public $comment = [
-        'user_id'             => 'required',
-        'meeting_id'          => 'required',
+        'user_id'             => 'required|is_not_unique[users.user_id]',
+        'meeting_id'          => 'required|is_not_unique[meeing_post.meeting_id]',
         'comment_description' => 'required'
     ];
 
     public $sale = [
-        'user_id'             => 'required|is_not_unique[users.user_id]',
-        'category_id'         => 'required|is_not_unique[categories.category_id]',
-        'sale_title'          => 'required',
-        'sale_description'    => 'required',
-        'sale_state'          => 'required|in_list[b,m,w]',
-        'sale_price'          => 'required|integer'
+        'user_id'          => 'required|is_not_unique[users.user_id]',
+        'category_id'      => 'required|is_not_unique[categories.category_id]',
+        'sale_title'       => 'required',
+        'sale_description' => 'required',
+        'sale_state'       => 'required|in_list[b,m,w]',
+        'sale_price'       => 'required|integer'
     ];
 
     public $shoppingCart = [
-        'user_id'             => 'required|is_not_unique[users.user_id]',
-        'sale_id'          => 'required|is_not_unique[sale_post.sale_id]',        
+        'user_id' => 'required|is_not_unique[users.user_id]',
+        'sale_id' => 'required|is_not_unique[sale_post.sale_id]',        
     ];
 
     public $chat = [
-        'to_id'           => 'required|is_not_unique[users.user_id]',
-        'from_id'         => 'required|is_not_unique[users.user_id]',        
-        'chat_message'    => 'required'
+        'to_id'        => 'required|is_not_unique[users.user_id]',
+        'from_id'      => 'required|is_not_unique[users.user_id]',        
+        'chat_message' => 'required'
+    ];
+
+    public $address = [
+        'user_id'     => 'required|is_not_unique[users.user_id]',
+        'fullAddress' => 'required',        
+        'zipNo'       => 'required'
     ];
 }

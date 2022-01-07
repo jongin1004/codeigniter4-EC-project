@@ -8,22 +8,21 @@ class BuyItemController extends BaseController
 {
     public function index()
     {
-        echo view('buy/paymentPage');
+        $session = session();
+        $addressModel = model('AddressModel');
+
+        $user_id = $session->get('user_id');
+        $addresses = $addressModel->where('user_id', $user_id)
+                    ->findAll();
+
+        echo view('buy/paymentPage', [
+            'addresses' => $addresses
+        ]);
     }
 
     // public function buyItem($id = null)
     // {
     //     $sale_id = $id;
 
-    // }
-
-    public function address()
-    {
-        echo view('buy/index_utf8');
-    }
-
-    public function addressPopup()
-    {
-        echo view('buy/jusoPopup_utf8');
-    }    
+    // }     
 }

@@ -72,6 +72,9 @@ $routes->post('fetch/sale', 'FetchController::getMoreSale');
 $routes->post('fetch/comment', 'FetchController::saveComment');
 // crop image
 $routes->post('fetch/cropImage', 'CropImageUpload::store');
+// save address
+$routes->post('fetch/address', 'AddressController::store');
+
 
 // comment
 $routes->post('comment', 'CommentController::save', ['filter' => 'auth']);
@@ -94,8 +97,8 @@ $routes->get('buy/(:num)', 'BuyItemController::index/$i');
 $routes->post('buy/payment', 'BuyItemController::payment');
 
 // address
-$routes->get('address', 'BuyItemController::address');
-$routes->match(['get', 'post'], 'addressPopup', 'BuyItemController::addressPopup');
+$routes->get('address', 'AddressController::address');
+$routes->match(['get', 'post'], 'addressPopup', 'AddressController::addressPopup');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
