@@ -8,19 +8,21 @@ class ChatController extends BaseController
 {
     public function index($id = null)
     {
-        // session 선언
+        // session /model 선언
         $session = session();
-        
+        $chatModel = model('ChatModel');        
+
         // user id
         $to_id = $id;
         $from_id = $session->get('user_id');        
-
-        $chatModel = model('ChatModel');
-        $chats = $chatModel->getChats($to_id, $from_id);        
-
+                
+        $chats = $chatModel->getChats($to_id, $from_id);
+        $chatTarget = $chatModel->getChatTarget($from_id);
+        
         echo view('chat/chat', [
             'to_id' => $to_id,
             'chats' => $chats,
+            'chatTarget' => $chatTarget,
         ]);
     }
     

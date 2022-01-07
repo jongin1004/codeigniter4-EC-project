@@ -5,12 +5,12 @@
         <h3>チャットページ</h3>
 
         <div class="row">
-            <div class="col-2">
-                리스트
+            <div class="col-3">
+                <?= $this->include('layout/chatSide') ?>
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <!-- 댓글 -->
-                <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <div class="p-3 bg-white rounded shadow-sm">
                     <h6 class="border-bottom border-gray pb-2 mb-0">コメント</h6>                    
                     <div style="min-height: 500px;">
                         <?php foreach ($chats as $chat) : ?>
