@@ -18,7 +18,7 @@ class ChatController extends BaseController
                 
         $chats = $chatModel->getChats($to_id, $from_id);
         $chatTarget = $chatModel->getChatTarget($from_id);
-        
+                
         echo view('chat/chat', [
             'to_id' => $to_id,
             'chats' => $chats,
@@ -56,10 +56,12 @@ class ChatController extends BaseController
             echo "error: can't insert";
         }
 
-        $chat = $chatModel->find($insert_id);
+        $chat = $chatModel->getChat($insert_id);
 
+        // var_dump($chat);
+        // exit;
         echo view('chat/chatList', [
-            'chat' => $chat,
+            'chat' => $chat[0],
         ]);
     }
 }
