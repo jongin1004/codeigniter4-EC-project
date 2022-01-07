@@ -25,9 +25,10 @@
                 </div>        
             <?php endif; ?>
         </div>
-
+        
         <div class="text-right">
             <a href="<?= base_url('shoppingCart/'.$sale_post['sale_id']) ?>" class="btn btn-primary">お気に入り</a>
-            <a href="<?= base_url('chat/'.$sale_post['user_id']) ?>" class="btn btn-danger">チャット</a>
+            <a href="<?= base_url('buy/'.$sale_post['sale_id']) ?>" class="btn btn-danger">購入</a>
+            <a href="<?= base_url('chat/'.$sale_post['user_id']) ?>" class="btn btn-success">チャット</a>
         </div> 
 <?= $this->endSection() ?>

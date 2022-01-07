@@ -89,7 +89,13 @@ $routes->get('shoppingCart/(:num)', 'ShoppingCartController::addItem/$1', ['filt
 $routes->get('chat/(:num)', 'ChatController::index/$1', ['filter' => 'auth']);
 $routes->post('fetch/chat', 'ChatController::saveChat', ['filter' => 'auth']);
 
+//buy items
+$routes->get('buy/(:num)', 'BuyItemController::index/$i');
+$routes->post('buy/payment', 'BuyItemController::payment');
 
+// address
+$routes->get('address', 'BuyItemController::address');
+$routes->match(['get', 'post'], 'addressPopup', 'BuyItemController::addressPopup');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
