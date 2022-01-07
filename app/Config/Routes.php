@@ -81,8 +81,12 @@ $routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
 
 // avatar
 $routes->get('avatar', 'DashboardController::avatar', ['filter' => 'auth']);
+
 // shopping-cart
 $routes->get('shoppingCart/(:num)', 'ShoppingCartController::addItem/$1', ['filter' => 'auth']);
+
+$routes->get('chat/(:num)', 'ChatController::index/$1', ['filter' => 'auth']);
+$routes->post('fetch/chat', 'ChatController::saveChat', ['filter' => 'auth']);
 
 
 /*
