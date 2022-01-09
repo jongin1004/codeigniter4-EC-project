@@ -28,16 +28,17 @@ class BuyItemController extends BaseController
         ]);
     }
 
-    public function payment($id = null)
+    public function payment($sale_id = null)
     {
         // session / model/ service 宣言
         $session = session();
         $paymentModel = model('paymentModel');
+        $saleModel = model('SaleModel');
         $validation = service('validation');
                 
         // get the data of POST
         $getPost = $this->request->getPost();
-        $getPost['sale_id'] = $id;
+        $getPost['sale_id'] = $sale_id;
         $getPost['user_id'] = $session->get('user_id');
         
         // check validate
@@ -62,6 +63,15 @@ class BuyItemController extends BaseController
             echo "<script> alert('決済に失敗しました。');window.location.assign('".previous_url()."');</script>";          
         }
 
+        // 商品が販売されたことをslae_postテーブルに入力
+        $updateData = [
+            'is_saled' => 'y',
+        ];
+        $updateResult = $saleModel->update($sale_id, $updateData);
+        if (!$updateResult) {
+            echo "<script> alert('Updateに失敗しました。');window.location.assign('".previous_url()."');</script>"; 
+        }        
+        
         echo '주문결과 확인페이지';      
     }
 }

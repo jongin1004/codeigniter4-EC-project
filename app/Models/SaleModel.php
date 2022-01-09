@@ -17,6 +17,7 @@ class SaleModel extends Model
         'sale_state',
         'sale_price',
         'is_delete',
+        'is_saled',
     ];
 
     // Dates
