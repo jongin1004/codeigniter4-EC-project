@@ -13,14 +13,15 @@ class BuyItemController extends BaseController
         $addressModel = model('AddressModel');
         $saleModel = model('SaleModel');
 
+        // 存在する商品かどうかを確認
         $user_id = $session->get('user_id');
         $saleInfo = $saleModel->find($sale_id);                
         if (empty($saleInfo)) {
-            return "존재하지 않는 상품입니다!";            
+            echo "<script> alert('間違った接近です。');window.location.assign('".previous_url()."');</script>";        
         }
-
+        // ユーザーのaddressを読み込み
         $addresses = $addressModel->where('user_id', $user_id)
-                    ->findAll();                
+                    ->findAll();
         echo view('buy/paymentPage', [
             'addresses' => $addresses,
             'saleInfo'  => $saleInfo,
@@ -34,11 +35,12 @@ class BuyItemController extends BaseController
         $paymentModel = model('paymentModel');
         $validation = service('validation');
                 
+        // get the data of POST
         $getPost = $this->request->getPost();
         $getPost['sale_id'] = $id;
         $getPost['user_id'] = $session->get('user_id');
         
-
+        // check validate
         $is_validate = $validation->run($getPost, 'payment');
         if (!$is_validate) {
             $errors = $validation->getErrors();
@@ -48,16 +50,16 @@ class BuyItemController extends BaseController
             return;
         }
 
+        // insert 
         $insertData = [
             'user_id'        => $getPost['user_id'],
             'sale_id'        => $getPost['sale_id'],
             'address_id'     => $getPost['address_id'],
             'payment_amount' => $getPost['payment_amount'],
         ];
-        $insert_id = $paymentModel->insert($insertData);
-        
+        $insert_id = $paymentModel->insert($insertData);        
         if (!$insert_id) {
-            return "Error : can't insert";            
+            echo "<script> alert('決済に失敗しました。');window.location.assign('".previous_url()."');</script>";          
         }
 
         echo '주문결과 확인페이지';      
