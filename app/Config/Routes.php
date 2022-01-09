@@ -93,11 +93,12 @@ $routes->get('chat/(:num)', 'ChatController::index/$1', ['filter' => 'auth']);
 $routes->post('fetch/chat', 'ChatController::saveChat', ['filter' => 'auth']);
 
 //buy items
-$routes->get('buy/(:num)', 'BuyItemController::index/$i');
-$routes->post('buy/payment', 'BuyItemController::payment');
+$routes->get('buy/(:num)', 'BuyItemController::index/$1', ['filter' => 'auth']);
+$routes->post('buy/(:num)/payment', 'BuyItemController::payment/$1', ['filter' => 'auth']);
 
 // address
 $routes->get('address', 'AddressController::address');
+// get은 popup창을 뛰우기 위함, post는 API에서 데이터를 가져오기 위함
 $routes->match(['get', 'post'], 'addressPopup', 'AddressController::addressPopup');
 /*
  * --------------------------------------------------------------------

@@ -95,4 +95,11 @@ class Validation
         'fullAddress' => 'required',        
         'zipNo'       => 'required'
     ];
+
+    public $payment = [
+        'user_id'        => 'required|is_not_unique[users.user_id]',
+        'sale_id'        => 'required|is_not_unique[sale_post.sale_id]',
+        'address_id'     => 'required|is_not_unique[address.address_id]',
+        'payment_amount' => 'required|integer'
+    ];
 }

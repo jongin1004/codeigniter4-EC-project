@@ -6,7 +6,7 @@
           
         <!-- payment -->
         <div class="p-3 bg-white rounded shadow-sm">                        
-            <form action="<?= base_url('buy/payment') ?>" method="post">
+            <form action="<?= base_url('buy/'.$saleInfo['sale_id'].'/payment') ?>" method="post">
                 <!-- adress -->
                 <h6 class="border-bottom border-gray pb-2 mb-2">注所</h6>
                 <?= $this->include('address/address') ?>
@@ -29,8 +29,8 @@
                 <!-- coupon -->
                 <h6 class="border-bottom border-gray pb-2 my-2">Coupon</h6>
                 <div class="form-group">
-                    <select class="form-control">
-                        <option>Default select</option>
+                    <select class="form-control" name="coupon">
+                        <option value="1">10%割引</option>
                     </select>
                 </div>
                 <a href="<?= base_url() ?>" class="btn btn-primary mb-5">適用</a>
@@ -39,12 +39,12 @@
                 <h6 class="border-bottom border-gray pb-2 mb-2">金額</h6>
                 <div class="card" style="width: 18rem;">
                     <ul class="list-group list-group-flush">
-                        <li class="d-flex list-group-item"><div class="flex-grow-1">商品金額</div><div>1</div></li>
-                        <li class="d-flex list-group-item"><div class="flex-grow-1">割引金額</div><div>1</div></li>
-                        <li class="d-flex list-group-item"><div class="flex-grow-1">最終金額</div><div>1</div></li>
+                        <li class="d-flex list-group-item"><div class="flex-grow-1">商品金額</div><div><?= $saleInfo['sale_price'] ?></div></li>
+                        <li class="d-flex list-group-item"><div class="flex-grow-1">割引金額</div><div><?= $discount = round($saleInfo['sale_price'] * 0.104, -1)?></div></li>
+                        <li class="d-flex list-group-item"><div class="flex-grow-1">最終金額</div><div><?= $payment_amount = round($saleInfo['sale_price'] - $discount, -1) ?></div></li>
                     </ul>
                 </div>
-
+                <input type="hidden" name="payment_amount" value="<?= $payment_amount ?>">
                 <button type="submit" class="btn btn-primary my-5">決済</button>
             </form>
             
