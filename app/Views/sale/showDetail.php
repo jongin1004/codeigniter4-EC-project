@@ -12,8 +12,11 @@
 
         <!-- 본문 -->
         <div class="d-flex flex-column my-3 p-3 bg-white rounded shadow-sm" style="min-height: 600px;">
-            <h5 class="border-bottom border-gray pb-2 mb-0"><?= esc($sale_post['sale_title']) ?></h5>
-            <div class="media text-muted pt-3 flex-grow-1">        
+            <h5 class="border-bottom border-gray py-2 mb-0" id="sale_title"><?= esc($sale_post['sale_title']) ?></h5>
+            <h5 class="border-bottom border-gray py-2 mb-0" id="sale_title"><?= '가격 : '.esc($sale_post['sale_price']) ?></h5>
+            <h5 class="border-bottom border-gray py-2 mb-0" id="sale_title"><?= '상태 : '.esc($sale_post['sale_state']) ?></h5>
+
+            <div class="media text-muted pt-3 flex-grow-1" id="sale_description">        
                 <?= $sale_post['sale_description'] ?>
             </div>
 
@@ -31,4 +34,12 @@
             <a href="<?= base_url('buy/'.$sale_post['sale_id']) ?>" class="btn btn-danger">購入</a>
             <a href="<?= base_url('chat/'.$sale_post['user_id']) ?>" class="btn btn-success">チャット</a>
         </div> 
+
+        <script>
+            let is_saled = "<?= $sale_post['is_saled'] ?>";
+            if (is_saled === 'y') {
+                $('#sale_title').append(' <span class="badge badge-danger">be sold</span>');
+            }
+            
+        </script>
 <?= $this->endSection() ?>

@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\Auth;
+use App\Filters\IsSaled;
 use App\Filters\IsOwnUser;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\Honeypot;
@@ -22,7 +23,8 @@ class Filters extends BaseConfig
         'toolbar'   => DebugToolbar::class,
         'honeypot'  => Honeypot::class,
         'auth'      => Auth::class,
-        'isOwnUser' => IsOwnUser::class,        
+        'isOwnUser' => IsOwnUser::class,
+        'isSaled'   => IsSaled::class,
     ];
 
     /**

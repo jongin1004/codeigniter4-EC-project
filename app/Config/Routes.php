@@ -93,7 +93,7 @@ $routes->get('chat/(:num)', 'ChatController::index/$1', ['filter' => 'auth']);
 $routes->post('fetch/chat', 'ChatController::saveChat', ['filter' => 'auth']);
 
 //buy items
-$routes->get('buy/(:num)', 'BuyItemController::index/$1', ['filter' => 'auth']);
+$routes->get('buy/(:num)', 'BuyItemController::index/$1', ['filter' => 'isSaled']);
 $routes->post('buy/(:num)/payment', 'BuyItemController::payment/$1', ['filter' => 'auth']);
 
 // address
