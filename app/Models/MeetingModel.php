@@ -17,9 +17,10 @@ class MeetingModel extends Model
     ];
 
     // Dates
-    // protected $useTimestamps = true;
-    // protected $dateFormat    = 'date';
-    // protected $createdField  = 'created_at';
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 
     // public function getMore()
     // {

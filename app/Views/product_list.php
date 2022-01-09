@@ -52,8 +52,8 @@
 										<div class="col-md-9">
 											<div class="card-body">
 												<h5 class="card-title"><strong><?= $meeting_post['meeting_title'] ?></strong></h5>
-												<p class="card-text"><?= $meeting_post['meeting_description'] ?></p>
-												<p class="card-text"><small class="text-muted"><?= $meeting_post['user_id'] ?></small></p>
+												<div class="card-text" id="meeting_description"><?= $meeting_post['meeting_description'] ?></div>
+												<p class="card-text"><small class="text-muted"><?= $meeting_post['created_at'] ?></small></p>
 											</div>
 										</div>
 									</div>
