@@ -67,6 +67,6 @@ class Filters extends BaseConfig
      * @var array
      */
     public $filters = [
-        'isDeleted' => ['before' => ['sale/*', 'meeting/*']],
+        'isDeleted' => ['before' => ['sale/[0-9]+', 'sale/[0-9]+/*', 'meeting/*']],
     ];
 }

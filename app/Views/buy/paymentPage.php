@@ -40,7 +40,7 @@
                 <div class="card" style="width: 18rem;">
                     <ul class="list-group list-group-flush">
                         <li class="d-flex list-group-item"><div class="flex-grow-1">商品金額</div><div><?= $saleInfo['sale_price'] ?></div></li>
-                        <li class="d-flex list-group-item"><div class="flex-grow-1">割引金額</div><div><?= $discount = round($saleInfo['sale_price'] * 0.104, -1)?></div></li>
+                        <li class="d-flex list-group-item"><div class="flex-grow-1">割引金額</div><div><?= $discount = round($saleInfo['sale_price'] * 0.1, -1)?></div></li>
                         <li class="d-flex list-group-item"><div class="flex-grow-1">最終金額</div><div><?= $payment_amount = round($saleInfo['sale_price'] - $discount, -1) ?></div></li>
                     </ul>
                 </div>

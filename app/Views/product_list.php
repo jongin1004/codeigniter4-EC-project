@@ -17,7 +17,10 @@
 								<div class="card" style="width: 15rem;">
 									<img src="images/orihinal.png" class="card-img-top">									
 									<div class="card-body">
-										<div class="card-text"><?= $sale_post['sale_title'] ?></div>									
+										<div class="card-text">
+											<strong><?= $sale_post['sale_title'] ?></strong>
+											<?php if ($sale_post['is_saled']) { echo "<span class='badge badge-danger'>be sold</span>"; } ?>
+										</div>
 										<div class="card-text"><small><?= $sale_post['created_at'] ?></small></div>
 									</div>
 								</div>
