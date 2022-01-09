@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Filters\Auth;
 use App\Filters\IsSaled;
+use App\Filters\IsDeleted;
 use App\Filters\IsOwnUser;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\Honeypot;
@@ -25,6 +26,7 @@ class Filters extends BaseConfig
         'auth'      => Auth::class,
         'isOwnUser' => IsOwnUser::class,
         'isSaled'   => IsSaled::class,
+        'isDeleted' => IsDeleted::class,
     ];
 
     /**
@@ -64,5 +66,7 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'isDeleted' => ['before' => ['sale/*', 'meeting/*']],
+    ];
 }
