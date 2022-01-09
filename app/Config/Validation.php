@@ -66,7 +66,7 @@ class Validation
 
     public $comment = [
         'user_id'             => 'required|is_not_unique[users.user_id]',
-        'meeting_id'          => 'required|is_not_unique[meeing_post.meeting_id]',
+        'meeting_id'          => 'required|is_not_unique[meeting_post.meeting_id]',
         'comment_description' => 'required'
     ];
 

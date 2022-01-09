@@ -56,14 +56,27 @@
     </div>
 
     <script>
-        let commentBtn = document.getElementById('comment_btn');
+        let commentBtn = document.getElementById('comment_btn');        
         commentBtn.addEventListener('click', () => {
             this.saveComment();
         });
 
         function saveComment() {
+            let comment_description = $('#comment_text').val();
+            let is_login = "<?= $session->get('is_login') ?>";
+
+            if (is_login === '') {
+                alert("Loginした上、利用してください。");
+                return;
+            }
+
+            if (comment_description === '') {
+                alert("Messageを入力してください。");
+                return;
+            }
+
 			let data = {
-				comment_description: $('#comment_text').val(),
+				comment_description: comment_description,
                 meeting_id: <?= $meeting_post['meeting_id'] ?>,
 			}
 
@@ -79,8 +92,9 @@
 					$('#comment_text').val('');
                     $('#commentTable').append(data);
                 },
-                error: function(error) { // if error occured
-                    console.log(error);
+                error: function(XMLHttpRequest, textStatus, errorThrown) { // if error occured
+                    console.log(XMLHttpRequest);
+                    // alert(error);
                 },
             })
         }
