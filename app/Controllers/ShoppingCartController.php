@@ -13,9 +13,18 @@ class ShoppingCartController extends BaseController
         $this->cartModel = model('ShoppingCartModel');
     }
 
-    public function index()
+    public function getList()
     {
-        //
+        // session / model 宣言
+        $session = session();
+        $cartModel = model('ShoppingCartModel');
+
+        $user_id = $session->get('user_id');
+
+        $shopping_carts = $cartModel->getCartAndSaleInfo($user_id);
+        echo view('dashboard/shoppingCart', [
+            'shopping_carts' => $shopping_carts,
+        ]);
     }
 
     public function addItem($id = null)

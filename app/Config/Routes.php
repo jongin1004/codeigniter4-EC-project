@@ -86,7 +86,8 @@ $routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
 $routes->get('avatar', 'DashboardController::avatar', ['filter' => 'auth']);
 
 // shopping-cart
-$routes->get('shoppingCart/(:num)', 'ShoppingCartController::addItem/$1', ['filter' => 'auth']);
+$routes->get('dashboard/shoppingcart', 'ShoppingCartController::getList', ['filter' => 'auth']);
+$routes->post('shoppingCart/(:num)', 'ShoppingCartController::addItem/$1', ['filter' => 'auth']);
 
 // chating
 $routes->get('chat/(:num)', 'ChatController::index/$1', ['filter' => 'auth']);

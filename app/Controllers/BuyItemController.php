@@ -72,6 +72,6 @@ class BuyItemController extends BaseController
             echo "<script> alert('Updateに失敗しました。');window.location.assign('".previous_url()."');</script>"; 
         }        
         
-        echo '주문결과 확인페이지';      
+        echo view('buy/paymentResult');      
     }
 }

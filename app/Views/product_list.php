@@ -53,7 +53,7 @@
 											<div class="card-body">
 												<h5 class="card-title"><strong><?= $meeting_post['meeting_title'] ?></strong></h5>
 												<div class="card-text" id="meeting_description"><?= $meeting_post['meeting_description'] ?></div>
-												<p class="card-text"><small class="text-muted"><?= $meeting_post['created_at'] ?></small></p>
+												<div class="card-text"><small class="text-muted"><?= $meeting_post['created_at'] ?></small></div>
 											</div>
 										</div>
 									</div>

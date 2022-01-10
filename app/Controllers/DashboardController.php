@@ -8,6 +8,7 @@ class DashboardController extends BaseController
 {
     public function index()
     {        
+        // session / model 宣言
         $session = session();
         $userModel = model('UserModel');
 
@@ -19,6 +20,7 @@ class DashboardController extends BaseController
 
     public function avatar()
     {
+        // session / model 宣言
         $session = session();
         $userModel = model('UserModel');
 

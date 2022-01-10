@@ -10,6 +10,7 @@ class ShoppingCartModel extends Model
     protected $primaryKey       = 'cart_id';
     protected $allowedFields    = ['user_id', 'sale_id'];
 
+    // insertする前に、当該商品が既にテーブルにあるかどうかを確認して保存
     public function saveCart($insertData)
     {
         $builder = $this->db->table('shopping_cart');
@@ -27,5 +28,17 @@ class ShoppingCartModel extends Model
                 ->insert();
         
         return $insertResult;
+    }
+
+    public function getCartAndSaleInfo($user_id)
+    {
+        $builder = $this->db->table('shopping_cart');
+        $getData = $builder->select(['sale_title', 'sale_price', 'sale_state', 'user_name'])
+                        ->join('sale_post', 'sale_post.sale_id = shopping_cart.sale_id')
+                        ->join('users', 'users.user_id = sale_post.user_id')
+                        ->where('shopping_cart.user_id', $user_id)
+                        ->get()->getResultArray();
+        
+        return $getData;
     }
 }
