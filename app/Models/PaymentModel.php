@@ -21,4 +21,15 @@ class PaymentModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
+    public function getPaymentInfo($payment_id)
+    {
+        $builder = $this->db->table('payment');
+        $getData = $builder->select(['sale_title', 'sale_price', 'fullAddress'])
+                        ->join('sale_post', 'sale_post.sale_id = payment.sale_id')
+                        ->join('address', 'address.address_id = payment.address_id')
+                        ->where('payment.payment_id', $payment_id)
+                        ->get()->getResultArray();
+
+        return $getData;
+    }
 }

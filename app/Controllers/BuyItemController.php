@@ -72,6 +72,10 @@ class BuyItemController extends BaseController
             echo "<script> alert('Updateに失敗しました。');window.location.assign('".previous_url()."');</script>"; 
         }        
         
-        echo view('buy/paymentResult');      
+
+        $paymentResult = $paymentModel->getPaymentInfo($insert_id);
+        echo view('buy/paymentResult', [
+            'paymentResult' => $paymentResult[0],
+        ]);      
     }
 }
